@@ -6,18 +6,15 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity('lost_pets')
-export class LostPet {
+@Entity('found_pets')
+export class FoundPet {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column({ type: 'varchar' })
-  name: string;
-
-  @Column({ type: 'varchar' })
   species: string;
 
-  @Column({ type: 'varchar' })
+  @Column({ type: 'varchar', nullable: true })
   breed: string;
 
   @Column({ type: 'varchar' })
@@ -33,13 +30,13 @@ export class LostPet {
   photo_url: string;
 
   @Column({ type: 'varchar' })
-  owner_name: string;
+  finder_name: string;
 
   @Column({ type: 'varchar' })
-  owner_email: string;
+  finder_email: string;
 
   @Column({ type: 'varchar' })
-  owner_phone: string;
+  finder_phone: string;
 
   @Column({
     type: 'geometry',
@@ -53,10 +50,7 @@ export class LostPet {
   address: string;
 
   @Column({ type: 'timestamp' })
-  lost_date: Date;
-
-  @Column({ type: 'boolean', default: true })
-  is_active: boolean;
+  found_date: Date;
 
   @CreateDateColumn()
   created_at: Date;
