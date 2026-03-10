@@ -21,7 +21,6 @@ export class FoundPetsService {
   async create(createFoundPetDto: CreateFoundPetDto): Promise<any> {
     const { latitude, longitude, ...petData } = createFoundPetDto;
 
-    // 1. Guardar la mascota encontrada
     const result = await this.dataSource.query(
       `INSERT INTO found_pets
         (species, breed, color, size, description, photo_url,
@@ -54,7 +53,6 @@ export class FoundPetsService {
 
     const foundPet = result[0];
 
-    // 2. Buscar mascotas perdidas cercanas (radio 500m) con ST_DWithin
     this.logger.log(
       `Buscando mascotas perdidas en radio de 500m desde (${latitude}, ${longitude})`,
     );
@@ -67,7 +65,6 @@ export class FoundPetsService {
 
     this.logger.log(`Encontradas ${nearbyLostPets.length} mascotas perdidas cercanas`);
 
-    // 3. Enviar correos de notificación a cada dueño
     const notifications: Array<{ pet: string; owner: string; distance: string; emailSent: boolean }> = [];
 
     for (const lostPet of nearbyLostPets) {

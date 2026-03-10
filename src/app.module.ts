@@ -22,7 +22,7 @@ import { FoundPet } from './found-pets/entities/found-pet.entity';
         password: configService.get('DB_PASSWORD', 'postgres'),
         database: configService.get('DB_DATABASE', 'petradar'),
         entities: [LostPet, FoundPet],
-        synchronize: true, // Solo para desarrollo
+        synchronize: true, 
         logging: false,
       }),
       inject: [ConfigService],
